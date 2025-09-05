@@ -1,6 +1,7 @@
 package galimullin.danis.tacocloud.controller;
 
-import galimullin.danis.tacocloud.TacoOrder;
+import galimullin.danis.tacocloud.model.TacoOrder;
+import galimullin.danis.tacocloud.repository.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,13 @@ import org.springframework.web.bind.support.SessionStatus;
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
 public class OrderController {
+
+    private OrderRepository orderRepository;
+
+    public OrderController(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
     @GetMapping("/current")
     public String orderForm() {
         return "orderForm";
@@ -27,6 +35,7 @@ public class OrderController {
             return "orderForm";
         }
         log.info("Processing order: {}", tacoOrder);
+        orderRepository.save(tacoOrder);
         sessionStatus.setComplete();
         return "redirect:/";
     }

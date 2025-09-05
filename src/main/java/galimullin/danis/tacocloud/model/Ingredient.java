@@ -1,4 +1,4 @@
-package galimullin.danis.tacocloud;
+package galimullin.danis.tacocloud.model;
 
 import lombok.Data;
 

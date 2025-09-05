@@ -1,4 +1,4 @@
-package galimullin.danis.tacocloud;
+package galimullin.danis.tacocloud.model;
 
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -7,10 +7,15 @@ import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
 public class TacoOrder {
+
+    private Long id;
+    private Date placedAt = new Date();
+
     @NotBlank
     private String deliveryName;
     @NotBlank
