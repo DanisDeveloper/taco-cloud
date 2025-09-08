@@ -1,17 +1,24 @@
 package galimullin.danis.tacocloud.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
-@Table
-public class Ingredient {
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+public class Ingredient implements Serializable {
 
     @Id
-    private final String id;
-    private final String name;
-    private final Type type;
+    private String id;
+    private String name;
+    private Type type;
 
     public enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
