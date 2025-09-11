@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: taco-cloud
+
+  datasource:
+    generate-unique-name: false
+    name: tacocloud
+
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: Ov23li3QPAvOKKAZEea9
+            client-secret: f519df78937a8fc27d76af955aec7e835e64d542
+            scope:
+              - read:user
+              - user:email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"

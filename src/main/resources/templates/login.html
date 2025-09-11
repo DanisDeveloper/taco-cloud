@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Taco cloud</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <div th:if="${error}">
+    Unable to login. Check username and password.
+  </div>
+
+  <p>New here? Click<a th:href="@{/register}">here</a> to register.</p>
+
+  <form th:action="@{/login}" method="POST" id="loginForm">
+    <label for="username">Username: </label>
+    <input type="text" name="username" id="username" /><br/>
+
+    <label for="password">Password: </label>
+    <input type="password" name="password" id="password" /><br/>
+
+    <input type="submit" value="Login"/>
+  </form>
+  <a th:href="@{/oauth2/authorization/github}">Login with GitHub</a>
+</body>
+</html>

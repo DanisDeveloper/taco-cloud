@@ -7,5 +7,8 @@
 <body>
     <h1>Hello, World!</h1>
     <img th:src="@{/images/taco-cloud.png}" alt="taco-cloud"/>
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout"/>
+    </form>
 </body>
 </html>
