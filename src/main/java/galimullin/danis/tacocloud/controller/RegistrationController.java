@@ -2,6 +2,7 @@ package galimullin.danis.tacocloud.controller;
 
 import galimullin.danis.tacocloud.model.RegistrationForm;
 import galimullin.danis.tacocloud.repository.UserRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ public class RegistrationController {
         this.passwordEncoder = passwordEncoder;
     }
 
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public String registerForm(Model model) {
         return "registration";
