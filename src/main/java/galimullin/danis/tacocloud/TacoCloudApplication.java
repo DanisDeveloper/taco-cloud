@@ -1,13 +1,14 @@
 package galimullin.danis.tacocloud;
 
 import galimullin.danis.tacocloud.model.Ingredient;
+import galimullin.danis.tacocloud.model.Ingredient.Type;
 import galimullin.danis.tacocloud.repository.IngredientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import galimullin.danis.tacocloud.model.Ingredient.Type;
+import org.springframework.context.annotation.Profile;
+
 @SpringBootApplication
 public class TacoCloudApplication {
 
@@ -16,6 +17,7 @@ public class TacoCloudApplication {
     }
 
     @Bean
+    @Profile("dev") // можно еще сделать типа !prod
     public CommandLineRunner dataLoader(IngredientRepository repo) {
         return args -> {
             repo.save(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));

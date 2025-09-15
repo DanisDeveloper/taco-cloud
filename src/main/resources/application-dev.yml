@@ -1,0 +1,6 @@
+logging:
+  file:
+    name: TacoCloud.log
+  level:
+    root: error
+    org.springframework.security: error

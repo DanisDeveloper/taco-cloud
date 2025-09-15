@@ -1,4 +1,8 @@
 spring:
+  profiles:
+    active:
+      - dev
+
   application:
     name: taco-cloud
 
@@ -30,5 +34,9 @@ logging:
   file:
     name: TacoCloud.log
   level:
-    root: warn
+    root: info
     org.springframework.security: debug
+
+taco:
+  orders:
+    pageSize: 10

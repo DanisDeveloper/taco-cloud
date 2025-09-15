@@ -1,12 +1,12 @@
 package galimullin.danis.tacocloud.repository;
 
 import galimullin.danis.tacocloud.model.TacoOrder;
-import org.springframework.data.jpa.repository.Query;
+import galimullin.danis.tacocloud.model.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
-import java.util.Date;
 import java.util.List;
 
 public interface OrderRepository extends CrudRepository<TacoOrder, Long> {
+    List<TacoOrder> findByUserOrderByPlacedAtDesc(User user, Pageable pageable);
 }
