@@ -2,5 +2,5 @@ logging:
   file:
     name: TacoCloud.log
   level:
-    root: error
-    org.springframework.security: error
+    root: info
+    org.springframework.security: info

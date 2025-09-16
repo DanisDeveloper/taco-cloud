@@ -24,11 +24,11 @@ spring:
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
 
 server:
-  port: 8443
-  ssl:
-    key-store: classpath:mykeys.jks
-    key-store-password: 167831
-    key-password: 167831
+  port: 8080
+#  ssl:
+#    key-store: classpath:mykeys.jks
+#    key-store-password: 167831
+#    key-password: 167831
 
 logging:
   file:
