@@ -23,6 +23,16 @@ spring:
               - user:email
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+    template:
+      exchange: tacocloud
+      receive-timeout: 30000
+
 server:
   port: 8080
 #  ssl:

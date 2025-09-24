@@ -56,8 +56,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+                .csrf(csrf -> csrf.disable())  // <--- отключаем CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/design", "/orders").hasRole("USER")
+                        .requestMatchers("/design/**", "/orders/**").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
                         .requestMatchers("/", "/**").permitAll()
                         .anyRequest().authenticated())

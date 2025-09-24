@@ -2,18 +2,29 @@ package galimullin.danis.tacocloud.controller;
 
 import galimullin.danis.tacocloud.model.TacoOrder;
 import galimullin.danis.tacocloud.repository.OrderRepository;
+import galimullin.danis.tacocloud.service.OrderMessagingService;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/orders", produces = "application/json")
+@CrossOrigin("http://localhost:8080")
 public class OrderRestController {
 
     private OrderRepository orderRepository;
-
-    public OrderRestController(OrderRepository orderRepository) {
+    private OrderMessagingService orderMessagingService;
+    public OrderRestController(OrderRepository orderRepository, OrderMessagingService orderMessagingService) {
+        this.orderMessagingService = orderMessagingService;
         this.orderRepository = orderRepository;
+    }
+
+
+    @PostMapping(consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public TacoOrder createOrder(@RequestBody TacoOrder order) {
+        this.orderMessagingService.sendOrder(order);
+        return this.orderRepository.save(order);
     }
 
     // Лучше в отдельный контроллер для заказов

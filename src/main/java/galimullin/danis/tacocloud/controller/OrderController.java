@@ -5,6 +5,7 @@ import galimullin.danis.tacocloud.model.TacoOrder;
 import galimullin.danis.tacocloud.model.User;
 import galimullin.danis.tacocloud.repository.OrderRepository;
 import galimullin.danis.tacocloud.repository.UserRepository;
+import galimullin.danis.tacocloud.service.OrderMessagingService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -31,10 +32,12 @@ public class OrderController {
 
     private OrderRepository orderRepository;
     private OrderProps orderProps;
+    private OrderMessagingService orderMessagingService;
 
-    public OrderController(OrderRepository orderRepository, OrderProps orderProps) {
+    public OrderController(OrderRepository orderRepository, OrderProps orderProps, OrderMessagingService orderMessagingService) {
         this.orderRepository = orderRepository;
         this.orderProps = orderProps;
+        this.orderMessagingService = orderMessagingService;
     }
 
     @GetMapping("/current")
@@ -53,6 +56,7 @@ public class OrderController {
         log.info("Processing order: {}", tacoOrder);
         tacoOrder.setUser(user);
         orderRepository.save(tacoOrder);
+        this.orderMessagingService.sendOrder(tacoOrder);
         sessionStatus.setComplete();
         return "redirect:/";
     }
