@@ -26,8 +26,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
-    implementation("org.springframework.boot:spring-boot-starter-amqp")
-
+//    implementation("org.springframework.boot:spring-boot-starter-amqp")
+    implementation("org.springframework.kafka:spring-kafka")
     implementation("com.h2database:h2")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok:1.18.30")
