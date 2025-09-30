@@ -1,6 +1,7 @@
 package galimullin.danis.tacocloud.controller;
 
 import galimullin.danis.tacocloud.config.OrderProps;
+import galimullin.danis.tacocloud.integration.FileWriterGateway;
 import galimullin.danis.tacocloud.model.TacoOrder;
 import galimullin.danis.tacocloud.model.User;
 import galimullin.danis.tacocloud.repository.OrderRepository;
@@ -33,11 +34,13 @@ public class OrderController {
     private OrderRepository orderRepository;
     private OrderProps orderProps;
     private OrderMessagingService orderMessagingService;
+    private FileWriterGateway  fileWriterGateway;
 
-    public OrderController(OrderRepository orderRepository, OrderProps orderProps, OrderMessagingService orderMessagingService) {
+    public OrderController(OrderRepository orderRepository, OrderProps orderProps, OrderMessagingService orderMessagingService, FileWriterGateway fileWriterGateway) {
         this.orderRepository = orderRepository;
         this.orderProps = orderProps;
         this.orderMessagingService = orderMessagingService;
+        this.fileWriterGateway = fileWriterGateway;
     }
 
     @GetMapping("/current")
@@ -57,6 +60,7 @@ public class OrderController {
         tacoOrder.setUser(user);
         orderRepository.save(tacoOrder);
         this.orderMessagingService.sendOrder(tacoOrder);
+        this.fileWriterGateway.writeToFile("orders.log", tacoOrder.toString());
         sessionStatus.setComplete();
         return "redirect:/";
     }
